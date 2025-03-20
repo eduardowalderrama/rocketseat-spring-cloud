@@ -24,6 +24,8 @@ public class TasksEntity {
 
     private String title;
 
+    private String email;
+
     private LocalDateTime dueDate;
 
     private boolean notified;
