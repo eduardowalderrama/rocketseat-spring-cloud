@@ -1,5 +1,11 @@
-package com.rocketseat.service.tasks;
+package com.rocketseat.service.tasks.domain.services;
 
+import com.rocketseat.service.tasks.adapter.in.entities.TasksEntity;
+import com.rocketseat.service.tasks.adapter.in.repositories.TasksRepository;
+import com.rocketseat.service.tasks.adapter.in.requests.NotificationRequest;
+import com.rocketseat.service.tasks.adapter.out.client.NotificationClient;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class TaskService {
@@ -13,7 +19,9 @@ public class TaskService {
     }
 
     public void sendNotificationForDueTasks() {
-        List<TasksEntity> tasks = repository.findDueTasks();
+        LocalDateTime deadline = LocalDateTime.now().plusDays(1);
+        List<TasksEntity> tasks = repository.findTasksDueWithinDeadline(deadline);
+
         for (TasksEntity task : tasks) {
             NotificationRequest request = new NotificationRequest("Sua tarefa: " + task.getTitle() +
                     " esta prestes a vencer ", task.getEmail());
