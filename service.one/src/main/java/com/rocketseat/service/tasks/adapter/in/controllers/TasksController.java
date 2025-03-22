@@ -2,6 +2,7 @@ package com.rocketseat.service.tasks.adapter.in.controllers;
 
 import com.rocketseat.service.tasks.adapter.in.entities.TasksEntity;
 import com.rocketseat.service.tasks.adapter.in.repositories.TasksRepository;
+import com.rocketseat.service.tasks.adapter.in.requests.TaskRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,9 +21,9 @@ public class TasksController {
     }
 
     @PostMapping
-    public ResponseEntity<TasksEntity> createTask(@RequestBody TasksEntity tasksEntity) {
+    public ResponseEntity<TasksEntity> createTask(@RequestBody TaskRequest request) {
+        TasksEntity tasksEntity = new TasksEntity(request);
         TasksEntity save = this.tasksRepository.save(tasksEntity);
         return new ResponseEntity<>(save, HttpStatus.CREATED);
     }
-
 }

@@ -1,5 +1,6 @@
 package com.rocketseat.service.tasks.adapter.in.entities;
 
+import com.rocketseat.service.tasks.adapter.in.requests.TaskRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,4 +28,11 @@ public class TasksEntity {
     private LocalDateTime dueDate;
 
     private boolean notified;
+
+    public TasksEntity(TaskRequest taskRequest) {
+        this.title = taskRequest.title();
+        this.email = taskRequest.email();
+        this.dueDate = taskRequest.dueDate();
+        this.notified = taskRequest.notified();
+    }
 }

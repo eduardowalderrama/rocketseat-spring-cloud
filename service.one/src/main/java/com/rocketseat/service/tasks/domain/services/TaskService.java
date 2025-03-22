@@ -4,10 +4,12 @@ import com.rocketseat.service.tasks.adapter.in.entities.TasksEntity;
 import com.rocketseat.service.tasks.adapter.in.repositories.TasksRepository;
 import com.rocketseat.service.tasks.adapter.in.requests.NotificationRequest;
 import com.rocketseat.service.tasks.adapter.out.client.NotificationClient;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Service
 public class TaskService {
     private final TasksRepository repository;
     private final NotificationClient client;
@@ -27,6 +29,7 @@ public class TaskService {
                     " esta prestes a vencer ", task.getEmail());
             client.sendNotification(request);
             task.setNotified(true);
+            repository.save(task);
         }
     }
 
