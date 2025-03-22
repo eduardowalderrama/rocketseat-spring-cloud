@@ -29,6 +29,7 @@ public class TaskService {
                     " esta prestes a vencer ", task.getEmail());
             client.sendNotification(request);
             task.setNotified(true);
+            repository.save(task);
         }
     }
 
